@@ -1,24 +1,21 @@
-var sqlite = require('sqlite3').verbose();
-var express = require('express');
-var bodyparser = require('body-parser');
-var app = express();
-
-var db = require('./database.js');
+let sqlite = require('sqlite3').verbose();
+let express = require('express');
+let bodyparser = require('body-parser');
+let db = require('./database.js');
+let app = express();
 
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(bodyparser.json());
 
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type, cache-control');
     return next();
 });
 
-var port = 8000;
-var router = express.Router();
-
-router.use(function(req, res, next) {
+const port = 8000;
+app.use((req, res, next) => {
   console.log('server in use');
   next();
 });
