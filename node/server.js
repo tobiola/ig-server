@@ -21,12 +21,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.get('/login/:username?:password?', function (req, res) {
+app.get('/login/:username?:password?', (req, res) => {
   let username = req.params.username;
   let password = req.params.password;
   let query = 'SELECT id FROM users WHERE username=? AND password=?;';
 
-  db.run(query, [username, password], function (err, pictures) {
+  db.run(query, [username, password], (err, pictures) => {
     if (err) {
       console.log(err.message);
       res.send('error finding user');
@@ -38,12 +38,12 @@ app.get('/login/:username?:password?', function (req, res) {
   });
 });
 
-app.post('/create/:username?:password?', function (req, res) {
+app.post('/create/:username?:password?', (req, res) => {
   let username = req.params.username;
   let password = req.params.password;
   let query = 'INSERT INTO users (username, password) VALUES(?,?);';
 
-  db.run(query, [username, password], function (err) {
+  db.run(query, [username, password], (err) => {
     if (err) {
       console.log('user already exists');
       res.send('user already exists');
@@ -56,6 +56,10 @@ app.post('/create/:username?:password?', function (req, res) {
   });
 });
 
-var server = app.listen(port, function () {
+app.post('/upload/:username', (req, res) => {
+
+});
+
+var server = app.listen(port, () => {
   console.log('server running at http://localhost:%s', port);
 });
