@@ -50,13 +50,16 @@ app.post('/create/:username?:password?', (req, res) => {
     }
     else {
       console.log('user created');
+      res.send('user created');
     }
 
     return;
   });
 });
 
-app.post('/upload/:username', (req, res) => {
+app.post('/upload/', (req, res) => {
+
+  // Lol this gonna be hard
 
 });
 
